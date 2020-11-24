@@ -31,14 +31,14 @@ module Enumerable
   end
 
   def my_any?
-    output = false
-    self.my_each { |item| output = true if yield(item)}
-    return output
+    result = false
+    self.my_each { |thng| result = true if yield(thng)}
+    return result
   end
 
   def my_none?
-    output = true
-    self.my_each { |item| output = false if yield(item)}
-    return output
+    result = true
+    self.my_each { |thng| result = false if yield(thng)}
+    return result
   end
 end
