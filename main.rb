@@ -41,4 +41,24 @@ module Enumerable
     self.my_each { |thng| result = false if yield(thng)}
     return result
   end
+
+  def my_count(obj=nil)
+  count = 0
+  
+    if block_given?
+      self.my_each do |x|
+        count += 1 if yield(x)
+      end
+    elsif obj
+      self.my_each do |x|
+        count += 1 if x == obj
+    end
+    else
+      count = self.length
+    end
+  end
+  
+    count
+  end
+  end
 end
