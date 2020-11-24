@@ -9,31 +9,32 @@ module Enumerable
     self
   end
 
-# 1. my_each
-puts 'my_each'
-puts '-------'
-puts [1, 2, 3].each { |elem| print "#{elem + 1} " } # => 2 3 4
-p (5..11).each { |i| puts "#{i}" }
-puts
-
   def my_each_with_index
     x = 0
-    new_arr = self.to_a
+    new_arr = to_a
     while x < new_arr.length
       yield(new_arr[x], x)
       x += 1
     end
-    new_arr
+    self
   end
 
   def my_select
-    n_arr = []
-    self.my_each do |y|
-      n_arr.push(y) if yield(y)
+    new_arr = []
+    my_each do |x|
+      new_arr.push(x) if yield(x)
     end
-    n_arr
-  end 
+    new_arr
+  end
 
+## 3. my_select
+puts 'my_select'
+puts '---------'
+p [1, 2, 3, 8].my_select(&:even?) # => [2, 8]
+p [0, 2018, 1994, -7].my_select { |n| n > 0 } # => [2018, 1994]
+p [6, 11, 13].my_select(&:odd?) # => [11, 13]
+p (1..5).my_select(&:odd?) # => [1, 3, 5]
+puts
   def my_all?
     x = 0
     while x < self.size
@@ -77,27 +78,6 @@ end
 
 #p multiply_els([2,4,5]) #=> 40
 
-
-## 2. my_each_with_index
-#puts 'my_each_with_index'
-#puts '------------------'
-#print [1, 2, 3].my_each_with_index { |elem, idx| puts "#{elem} : #{idx}" } # => 1 : 0, 2 : 1, 3 : 2
-#p (1..3).my_each_with_index { |elem, idx| puts "#{elem} : #{idx}" } # => 1 : 0, 2 : 1, 3 : 2
-#my_each_with_index_output = ''
-#enum=(1..5)
-#block = proc { |num, idx| my_each_with_index_output += "Num: #{num}, idx: #{idx}\n" }
-#p enum.each_with_index(&block)
-#my_each_with_index_output = ''
-#p enum.my_each_with_index(&block)
-#puts
-## 3. my_select
-#puts 'my_select'
-#puts '---------'
-#p [1, 2, 3, 8].my_select(&:even?) # => [2, 8]
-#p [0, 2018, 1994, -7].my_select { |n| n > 0 } # => [2018, 1994]
-#p [6, 11, 13].my_select(&:odd?) # => [11, 13]
-#p (1..5).my_select(&:odd?) # => [1, 3, 5]
-#puts
 ## 4. my_all? (example test cases)
 #puts 'my_all?'
 #puts '-------'
