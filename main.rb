@@ -27,74 +27,85 @@ module Enumerable
     new_arr
   end
 
-## 3. my_select
-puts 'my_select'
-puts '---------'
-p [1, 2, 3, 8].my_select(&:even?) # => [2, 8]
-p [0, 2018, 1994, -7].my_select { |n| n > 0 } # => [2018, 1994]
-p [6, 11, 13].my_select(&:odd?) # => [11, 13]
-p (1..5).my_select(&:odd?) # => [1, 3, 5]
-puts
   def my_all?
     x = 0
     while x < self.size
       unless yield(self[x])
         return false
       end
-    x += 1
+
+      x += 1
     end
     true
   end
-
+# 4. my_all? (example test cases)
+puts 'my_all?'
+puts '-------'
+p [3, 5, 7, 11].my_all?(&:odd?) # => true
+p [-8, -9, -6].my_all? { |n| n < 0 } # => true
+p [3, 5, 8, 11].my_all?(&:odd?) # => false
+p [-8, -9, -6, 0].my_all? { |n| n < 0 } # => false
+# test cases required by tse reviewer
+p [1, 2, 3, 4, 5].my_all? # => true
+p [1, 2, 3, false].my_all? # => false
+p [1, 2, 3].my_all?(Integer) # => true
+p %w[dog door rod blade].my_all?(/d/) # => true
+p [1, 1, 1].my_all?(1) # => true
+false_block = proc { |n| n<5 }
+p (1..5).my_all?(&false_block) # false
+p [1, 2.2, 3, 0.6].my_all?(Numeric) #=> True
+puts
   def my_any?
     result = false
-    self.my_each { |tng| result = true if yield(tng)}
-    return result
+    my_each { |item| result = true if yield(item) }
+    result
   end
 
   def my_none?
     result = true
-    self.my_each { |tng| result = false if yield(tng)}
-    return result
+    my_each { |item| result = false if yield(item) }
+    result
   end
 
-  def my_count(obj=nil)
-  count = 0
-  
-    if block_given?
-      self.my_each do |x|
-        count += 1 if yield(x)
-      end
-    elsif obj
-      self.my_each do |x|
-        count += 1 if x == obj
+  def my_count(obj = nil)
+    count = 0
+  if block_given?
+    my_each do |x|
+      count += 1 if yield(x)
     end
-    else
-      count = self.length
+  elsif obj
+    my_each do |x|
+      count += 1 if x == obj
     end
+  else
+    count = length
+  end
   count
+  end
+
+  def my_map(proc = nil)
+    new_arr = []
+    my_select { |x| new_arr.push(yield(x)) } if proc.nil?
+    my_select { |x| new_arr.push(proc.call(x)) } unless proc.nil?
+    new_arr
+  end
+
+  def my_inject(result = nil)
+    result = self[0] if result.nil?
+    my_each do |x|
+      result = yield(result, x)
+    end
+    result
+  end
+
+  def multiply_els
+    my_inject(1) { |total, item| total * item }
   end
 end
 
 #p multiply_els([2,4,5]) #=> 40
 
-## 4. my_all? (example test cases)
-#puts 'my_all?'
-#puts '-------'
-#p [3, 5, 7, 11].my_all?(&:odd?) # => true
-#p [-8, -9, -6].my_all? { |n| n < 0 } # => true
-#p [3, 5, 8, 11].my_all?(&:odd?) # => false
-#p [-8, -9, -6, 0].my_all? { |n| n < 0 } # => false
-## test cases required by tse reviewer
-#p [1, 2, 3, 4, 5].my_all? # => true
-#p [1, 2, 3, false].my_all? # => false
-#p [1, 2, 3].my_all?(Integer) # => true
-#p %w[dog door rod blade].my_all?(/d/) # => true
-#p [1, 1, 1].my_all?(1) # => true
-#false_block = proc { |n| n<5 }
-#p (1..5).my_all?(&false_block) # false
-#p [1, 2.2, 3, 0.6].my_all?(Numeric) #=> True
-#puts
+
 ## 5. my_any? (example test cases)
 #puts 'my_any?'
 #puts '-------'
