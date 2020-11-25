@@ -72,17 +72,13 @@ module Enumerable
   def my_count(*arg)
     count = 0
     if block_given?
-      my_each do |x|
-        count += 1 if yield(x)
-      end
-    elsif arg
-      my_each do |x|
-        count += 1 if x == arg
-      end
+      my_select { |x| count += 1 if yield(x) }
+      count
     else
-      count = length
+      return (my_select { |x| x == arg[0] }).length if arg != []
+
+      size
     end
-    count
   end
 
 # 7. my_count (example test cases)
