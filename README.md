@@ -10,7 +10,7 @@ This project consist in rebuilding some Enumerable methods which are default in 
 
 In this project, i created nine methods:
     
-- my_each method that behaves like the each Enumerable method in Ruby
+- my_each method that behaves like each Enumerable method in Ruby
 - my_each_with_index that behaves like the each_with_index Enumerable method in Ruby
 - my_select that behaves like the select Enumerable method in Ruby
 - my_all? that behaves like the all? Enumerable method in Ruby

@@ -81,18 +81,6 @@ module Enumerable
     end
   end
 
-# 7. my_count (example test cases)
-puts 'my_count'
-puts '--------'
-p [1, 4, 3, 8].my_count(&:even?) # => 2
-p %w[DANIEL JIA KRITI dave].my_count { |s| s == s.upcase } # => 3
-p %w[daniel jia kriti dave].my_count { |s| s == s.upcase } # => 0
-# test cases required by tse reviewer
-p [1, 2, 3].my_count # => 3
-p [1, 1, 1, 2, 3].my_count(1) # => 3
-p (1..3).my_count #=> 3
-puts
-
   def my_map(proc = nil)
     new_arr = []
     my_select { |x| new_arr.push(yield(x)) } if proc.nil?
