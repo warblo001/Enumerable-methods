@@ -3,6 +3,8 @@
 
 module Enumerable
   def my_each
+    return to_enum(:each) unless block_given?
+
     x = 0
     new_arr = to_a
     while x < new_arr.length
@@ -13,6 +15,8 @@ module Enumerable
   end
 
   def my_each_with_index
+    return to_enum(:each) unless block_given?
+
     x = 0
     new_arr = to_a
     while x < new_arr.length
@@ -23,6 +27,8 @@ module Enumerable
   end
 
   def my_select
+    return to_enum(:my_select) unless block_given?
+
     new_arr = []
     my_each do |x|
       new_arr.push(x) if yield(x)
@@ -82,6 +88,8 @@ module Enumerable
   end
 
   def my_map(proc = nil)
+    return to_enum(:my_map) unless block_given? || proc
+
     new_arr = []
     my_select { |x| new_arr.push(yield(x)) } if proc.nil?
     my_select { |x| new_arr.push(proc.call(x)) } unless proc.nil?
