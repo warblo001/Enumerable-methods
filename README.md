@@ -1,17 +1,24 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Bubble sort and bubble sort by algorithm
+# Enumerable methods
 
 ## Definition
 
-Bubble sort, is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and change them if they are in the wrong order. The pass through the list is repeated until the list is sorted.
+This project consist in rebuilding some Enumerable methods which are default in ruby.
 
 ## About the Project
 
-In this project, there are two methods `bubble_sort` and `bubble_sort_by`.
+In this project, i created nine methods:
     
-   - `bubble_sort` method sorts the array of integers in ascending order.
-   - `bubble_sort_by` method sorts the array of strings in ascending order based on the number of characters in the strings.
+- my_each method that behaves like the each Enumerable method in Ruby
+- my_each_with_index that behaves like the each_with_index Enumerable method in Ruby
+- my_select that behaves like the select Enumerable method in Ruby
+- my_all? that behaves like the all? Enumerable method in Ruby
+- my_any? that behaves like the any? Enumerable method in Ruby
+- my_none? that behaves like the none Enumerable method in Ruby
+- my_count that behaves like the count Enumerable method in Ruby
+- my_map that behaves like the map Enumerable method in Ruby
+- my_inject that behaves like the inject Enumerable method in Ruby
 
 ## Built With
 
@@ -25,7 +32,7 @@ In this project, there are two methods `bubble_sort` and `bubble_sort_by`.
 **To get a local copy up and running follow these simple example steps.**
 
    - Clone this repo.
-   - Navigate to the bubble_sort folder
+   - Navigate to the Enumerable-methods folder
    - In your terminal run `ruby main.rb`
    - You are successful to get a local copy up and running.
 
