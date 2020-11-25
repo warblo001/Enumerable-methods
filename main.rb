@@ -97,9 +97,31 @@ p [1, 1, 1, 2, 3].my_count(1) # => 3
 p (1..3).my_count #=> 3
 puts
 
-  
+  def my_map(proc = nil)
+    new_arr = []
+    my_select { |x| new_arr.push(yield(x)) } if proc.nil?
+    my_select { |x| new_arr.push(proc.call(x)) } unless proc.nil?
+    new_arr
+  end
+
+  def my_inject(arg = nil, sym = nil)
+    if (arg.is_a?(Symbol) || arg.is_a?(String)) && (!arg.nil? && sym.nil?)
+      sym = arg
+      arg = nil
+    end
+
+    if !block_given? && !sym.nil?
+      my_each { |x| arg = arg.nil? ? x : arg.send(sym, x) }
+    else
+      my_each { |x| arg = arg.nil? ? x : yield(arg, x) }
+    end
+    arg
+  end
 end
 
+def multiply_els(array)
+  array.my_inject(1) { |tot, item| tot * item }
+end
 
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
