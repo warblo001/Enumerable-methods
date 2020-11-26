@@ -9,7 +9,7 @@ This project consist in rebuilding some Enumerable methods which are default in 
 ## About the Project
 
 In this project, i created nine methods:
-    
+
 - my_each method that behaves like each Enumerable method in Ruby
 - my_each_with_index that behaves like the each_with_index Enumerable method in Ruby
 - my_select that behaves like the select Enumerable method in Ruby
@@ -45,7 +45,7 @@ In this project, i created nine methods:
 - Twitter: [@twitter](https://twitter.com/Alan55572391)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/alan-solis-b567b044/)
 
-## 🤝 Contributing
+## 🤝 Contributing 
 
 Contributions, issues, and feature requests are welcome!
 
